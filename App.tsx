@@ -109,14 +109,8 @@ class App extends React.Component<any, any> {
               // Style of the cell in the row - can be 'round' or 'square'
               // cellType={} 
 
-              // Horizontal spacing of the cells in the row - default is 0
-              // cellSpacing={} 
-
-              // Start inset of cells in the row - default is 0
-              // startInset={} 
-
-              // End inset of cells in the row - default is 0
-              // endInset={} 
+              // SDK specific appearance style
+              // uiStyle={} 
 
               // SDK specific appearance customization
               // theme={} 

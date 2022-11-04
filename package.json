@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@getstoryteller/react-native-storyteller-sdk": "^6.1.2",
+    "@getstoryteller/react-native-storyteller-sdk": "^7.0.3",
     "react": "17.0.2",
     "react-native": "0.66.0"
   },
