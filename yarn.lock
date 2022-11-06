@@ -768,10 +768,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@getstoryteller/react-native-storyteller-sdk@^7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@getstoryteller/react-native-storyteller-sdk/-/react-native-storyteller-sdk-7.0.3.tgz#4e91532b501ec6e60cb1d9f865cc79949b9f85b9"
-  integrity sha512-6XpYNNV+nu45GbVPT83SXW7fFhkTgcY/9GIvrvMfEgk6uGmeApRT/P31c50ePwqMFPNdaIH3j3DI4rU02QASYg==
+"@getstoryteller/react-native-storyteller-sdk@^8.2.4":
+  version "8.2.4"
+  resolved "https://registry.yarnpkg.com/@getstoryteller/react-native-storyteller-sdk/-/react-native-storyteller-sdk-8.2.4.tgz#14d365ef5968cf0fd2979f95e62c2935957372af"
+  integrity sha512-upJfjlSN1lr9H0hzzW6XzvBeYjlDl02G0PvGuDRQh287zGGQ3IOu1LpY/QwSK8IDnR1/f9DOk0P8W/LL35RGWg==
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"

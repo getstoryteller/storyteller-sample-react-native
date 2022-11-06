@@ -29,7 +29,7 @@ To install the package:
 To run the sample app (Android):
 
 ```
-    yarn example android
+    yarn android
 ```
 
 or
@@ -43,7 +43,7 @@ To run the sample app (iOS):
 
 ```
     cd ios && pod install
-    yarn example ios
+    yarn ios
 ```
 
 or
