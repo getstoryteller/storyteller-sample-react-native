@@ -59,7 +59,7 @@ class App extends React.Component<any, any> {
         : new NativeEventEmitter();
     this.actionListener = storytellerEvt.addListener(
       USER_NAVIGATED_TO_APP,
-      this._onUserSwipedUpToApp,
+      this._onUserNavigatedToApp,
     ); // Callback for when the user swipes up on a page configured as inApp link
     this.adsListener = storytellerEvt.addListener(
       GET_ADS_FOR_LIST,
@@ -87,8 +87,8 @@ class App extends React.Component<any, any> {
     );
   };
 
-  _onUserSwipedUpToApp = (body: {swipeUpUrl: string}) => {
-    console.log(`UserSwipedUpToApp\n` + `swipeUpUrl: ${body.swipeUpUrl}`);
+  _onUserNavigatedToApp = (body: {url: string}) => {
+    console.log(`UserNavigatedToApp\n` + `url: ${body.url}`);
   };
 
   _onGetAdsForList = (body: {stories: [ClientStory]}) => {
