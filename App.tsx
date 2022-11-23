@@ -26,6 +26,8 @@ const {StorytellerSdk} = NativeModules;
 import Storyteller, {
   StorytellerRowView,
   StorytellerGridView,
+  StorytellerClipsRowView,
+  StorytellerClipsGridView,
 } from '@getstoryteller/react-native-storyteller-sdk';
 const {USER_NAVIGATED_TO_APP, GET_ADS_FOR_LIST, ON_USER_ACTIVITY_OCCURRED} =
   Storyteller.getConstants();
@@ -40,6 +42,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 class App extends React.Component<any, any> {
   private rowRef?: StorytellerRowView;
   private gridRef?: StorytellerGridView;
+  private rowClipsRef?: StorytellerClipsRowView
 
   private actionListener: any;
   private adsListener: any;
@@ -110,6 +113,7 @@ class App extends React.Component<any, any> {
   _reloadDataIfNeeded = () => {
     if (this.rowRef) this.rowRef.reloadData();
     if (this.gridRef) this.gridRef.reloadData();
+    if (this.rowClipsRef) this.rowClipsRef.reloadData();
   };
 
   render() {
@@ -132,8 +136,11 @@ class App extends React.Component<any, any> {
 
               // learn more - https://docs.getstoryteller.com/documents/react-native-sdk/StorytellerComponent
 
-              // Categories for which row will display storie
+              // Categories for which row will display stories
               // categories={}
+
+              // Number of stories displayed in component
+              // displayLimit={}
 
               // Style of the cell in the row - can be 'round' or 'square'
               // cellType={}
@@ -150,15 +157,46 @@ class App extends React.Component<any, any> {
               // Callback for when the SDK finishes loading story data
               // onDataLoadCompleted={}
 
-              // Callback for when the user exits the story player view
-              // onStoryDismiss={}
+              // Callback for when the user exits the player view
+              // onPlayerDismiss={}
 
               // Callback for when a tile in the row becomes visible
               // onTileBecameVisible={}
-
-              // Callback for when the SDK opens a deep link and reports success
-              // onOpenDeeplinkResult={}
             />
+            <StorytellerClipsRowView 
+            ref={(ref: any) => {
+              if (ref) this.rowClipsRef = ref;
+            }}
+            style={styles.clipsContainer}
+
+              // Collection for which row will display clips
+              // collection={}
+
+               // Number of stories displayed in component
+              // displayLimit={}
+
+              // Style of the cell in the row - can be 'round' or 'square'
+              // cellType={}
+
+              // SDK specific appearance style
+              // uiStyle={}
+
+              // SDK specific appearance customization
+              // theme={}
+
+              // Callback for when the SDK starts loading story data
+              // onDataLoadStarted={}
+
+              // Callback for when the SDK finishes loading story data
+              // onDataLoadCompleted={}
+
+              // Callback for when the user exits the player view
+              // onPlayerDismiss={}
+
+              // Callback for when a tile in the row becomes visible
+              // onTileBecameVisible={}
+            />
+          
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -178,6 +216,12 @@ const styles = StyleSheet.create({
     height: 168,
     width: 'auto',
   },
+  clipsContainer: {
+    height: 168,
+    width: 'auto',
+    marginTop: 20,
+  },
 });
+
 
 export default App;
