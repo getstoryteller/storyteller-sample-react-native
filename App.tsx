@@ -19,6 +19,7 @@ import {
   NativeEventEmitter,
   NativeModules,
   Platform,
+  Image,
 } from 'react-native';
 
 const {StorytellerSdk} = NativeModules;
@@ -150,7 +151,26 @@ class App extends React.Component<any, any> {
               // uiStyle={}
 
               // SDK specific appearance customization
-              // theme={}
+              theme={{
+                light: {
+                  instructions: {
+                    icons: {
+                      forward: Image.resolveAssetSource(
+                        require(`./assets/ic_forward_black.png`)
+                      ),
+                      pause: Image.resolveAssetSource(
+                        require(`./assets/ic_pause_black.png`)
+                      ),
+                      back: Image.resolveAssetSource(
+                        require(`./assets/ic_back_black.png`)
+                      ),
+                      move: Image.resolveAssetSource(
+                        require(`./assets/ic_swipe_black.png`)
+                      ),
+                    },
+                  },
+                }
+              }}
 
               // Callback for when the SDK starts loading story data
               // onDataLoadStarted={}
