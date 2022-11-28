@@ -99,10 +99,11 @@ class App extends React.Component<any, any> {
   };
 
   _initializeStoryteller = () => {
-    Storyteller.initialize(
-      'test-key',
-      'test-user',
-      '', // URL of custom instance to run API
+    Storyteller.initialize({
+      apiKey: 'test-key',
+      externalId: 'test-user',
+      customInstanceHost: '', // URL of custom instance to run API
+    },
       (callback: {result: Boolean; message: string}) => {
         console.log(`result: ${callback.result} message: ${callback.message}`);
         this._reloadDataIfNeeded();
