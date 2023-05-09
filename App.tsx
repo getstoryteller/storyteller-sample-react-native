@@ -25,8 +25,8 @@ import {
 const {StorytellerSdk} = NativeModules;
 
 import Storyteller, {
-  StorytellerRowView,
-  StorytellerGridView,
+  StorytellerStoriesRowView,
+  StorytellerStoriesGridView,
   StorytellerClipsRowView,
   StorytellerClipsGridView,
 } from '@getstoryteller/react-native-storyteller-sdk';
@@ -35,14 +35,14 @@ const {USER_NAVIGATED_TO_APP, GET_ADS_FOR_LIST, ON_USER_ACTIVITY_OCCURRED} =
 import type {
   EventType,
   UserActivityData,
-  ClientStory,
+  GetAdsForListEvent
 } from '@getstoryteller/react-native-storyteller-sdk';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 class App extends React.Component<any, any> {
-  private rowRef?: StorytellerRowView;
-  private gridRef?: StorytellerGridView;
+  private rowRef?: StorytellerStoriesRowView;
+  private gridRef?: StorytellerStoriesGridView;
   private rowClipsRef?: StorytellerClipsRowView
 
   private actionListener: any;
@@ -95,8 +95,8 @@ class App extends React.Component<any, any> {
     console.log(`UserNavigatedToApp\n` + `url: ${body.url}`);
   };
 
-  _onGetAdsForList = (body: {stories: [ClientStory]}) => {
-    console.log(`GetAdsForList\n` + `stories: ${JSON.stringify(body.stories)}`);
+  _onGetAdsForList = (event: GetAdsForListEvent) => {
+    console.log(`GetAdsForList: ${JSON.stringify(event)}`);
   };
 
   _initializeStoryteller = () => {
@@ -130,7 +130,7 @@ class App extends React.Component<any, any> {
               flex: 1,
               backgroundColor: isDarkMode ? Colors.black : Colors.white,
             }}>
-            <StorytellerRowView
+            <StorytellerStoriesRowView
               ref={(ref: any) => {
                 if (ref) this.rowRef = ref;
               }}

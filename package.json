@@ -7,10 +7,12 @@
     "ios": "react-native run-ios --simulator=\"iPhone 14 Pro\"",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "postinstall": "patch-package"
   },
   "dependencies": {
-    "@getstoryteller/react-native-storyteller-sdk": "^8.3.0",
+    "@getstoryteller/react-native-storyteller-sdk": "^9.1.2",
+    "patch-package": "^7.0.0",
     "react": "17.0.2",
     "react-native": "0.66.0"
   },
