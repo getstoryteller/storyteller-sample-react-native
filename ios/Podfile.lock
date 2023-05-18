@@ -329,9 +329,9 @@ PODS:
   - React-jsinspector (0.71.7)
   - React-logger (0.71.7):
     - glog
-  - react-native-storyteller-sdk (9.1.2):
+  - react-native-storyteller-sdk (9.1.4):
     - React-Core
-    - StorytellerSDK (~> 9.1.2)
+    - StorytellerSDK (~> 9.1.4)
   - React-perflogger (0.71.7)
   - React-RCTActionSheet (0.71.7):
     - React-Core/RCTActionSheetHeaders (= 0.71.7)
@@ -417,7 +417,7 @@ PODS:
     - React-logger (= 0.71.7)
     - React-perflogger (= 0.71.7)
   - SocketRocket (0.6.0)
-  - StorytellerSDK (9.1.2)
+  - StorytellerSDK (9.1.4)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -610,7 +610,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: eaa5f71eb8f6861cf0e57f1a0f52aeb020d9e18e
   React-jsinspector: 9885f6f94d231b95a739ef7bb50536fb87ce7539
   React-logger: 3f8ebad1be1bf3299d1ab6d7f971802d7395c7ef
-  react-native-storyteller-sdk: ced15748eb92186dea3eaecad2113ee1b996b817
+  react-native-storyteller-sdk: a1272abb583f319f22980b81e9c80d8381946ac4
   React-perflogger: 2d505bbe298e3b7bacdd9e542b15535be07220f6
   React-RCTActionSheet: 0e96e4560bd733c9b37efbf68f5b1a47615892fb
   React-RCTAnimation: fd138e26f120371c87e406745a27535e2c8a04ef
@@ -625,7 +625,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: c5c89f8f543842dd864b63ded1b0bbb9c9445328
   ReactCommon: dbfbe2f7f3c5ce4ce44f43f2fd0d5950d1eb67c5
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  StorytellerSDK: f9b7f704e4d7b7dbaa049cb5446f41c0a8e5d1ec
+  StorytellerSDK: 0ecc09f9528229a42487c13b969ab74086310b2b
   Yoga: d56980c8914db0b51692f55533409e844b66133c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
