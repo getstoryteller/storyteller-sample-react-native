@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import useStorytellerConfig from '../hooks/useStorytellerConfig';
 import VerticalVideoListRenderer from './VerticalVideoListRenderer';
 import {View} from 'react-native';
-import { VerticalVideoList } from '../models/content';
+import {VerticalVideoList} from '../models/content';
 
 interface VerticalVideoListsProps {}
 
@@ -27,7 +27,7 @@ const VerticalVideoLists = ({}: VerticalVideoListsProps) => {
   }, [setLists, storytellerApiKey]);
 
   return (
-    <View className="container mx-auto">
+    <View>
       <VerticalVideoListRenderer verticalVideoLists={lists} />
     </View>
   );

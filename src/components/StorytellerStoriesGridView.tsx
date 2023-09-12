@@ -4,19 +4,24 @@ import {StyleSheet, View} from 'react-native';
 import TitleAndMoreButton from './TitleAndMoreButton';
 import useRefCallback from '../hooks/useRefCallback';
 import useStoryteller from '../hooks/useStoryteller';
+import basicTheme from '../helpers/basicTheme';
 
 interface StorytellerStoriesGridViewProps {
+  id: string;
   categories: string[];
   title?: string | undefined;
-  moreButtonTitle?: string | undefined;
   displayLimit?: number | undefined;
+  onReloadComplete: (listId: string) => void;
+  onError: (listId: string) => void;
 }
 
 const StorytellerStoriesGridView = ({
+  id,
   categories,
   title,
   displayLimit,
-  moreButtonTitle,
+  onReloadComplete,
+  onError,
 }: StorytellerStoriesGridViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
   let [storyGrid] = useRefCallback<StorytellerSDKGridView>(
@@ -34,21 +39,30 @@ const StorytellerStoriesGridView = ({
   const styles = StyleSheet.create({
     storyContainer: {
       width: 'auto',
+      marginLeft: 12,
+      marginRight: 12,
     },
   });
 
-  // TODO : Proper PTR
-
   return (
     <View>
-      {title && (
-        <TitleAndMoreButton title={title} moreButtonTitle={moreButtonTitle} />
-      )}
+      {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKGridView
         ref={storyGrid}
         categories={categories}
         displayLimit={displayLimit}
         style={styles.storyContainer}
+        theme={basicTheme}
+        onDataLoadCompleted={(
+          success: boolean,
+          _error: Error,
+          dataCount: number,
+        ) => {
+          if (!success || dataCount === 0) {
+            onError(id);
+          }
+          onReloadComplete(id);
+        }}
       />
     </View>
   );

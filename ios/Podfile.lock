@@ -329,7 +329,7 @@ PODS:
   - React-jsinspector (0.71.7)
   - React-logger (0.71.7):
     - glog
-  - react-native-storyteller-sdk (9.1.4):
+  - react-native-storyteller-sdk (9.1.6):
     - React-Core
     - StorytellerSDK (~> 9.1.4)
   - React-perflogger (0.71.7)
@@ -610,7 +610,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: eaa5f71eb8f6861cf0e57f1a0f52aeb020d9e18e
   React-jsinspector: 9885f6f94d231b95a739ef7bb50536fb87ce7539
   React-logger: 3f8ebad1be1bf3299d1ab6d7f971802d7395c7ef
-  react-native-storyteller-sdk: a1272abb583f319f22980b81e9c80d8381946ac4
+  react-native-storyteller-sdk: 2958aa144fedabd64a1d567723f4686bc6c63421
   React-perflogger: 2d505bbe298e3b7bacdd9e542b15535be07220f6
   React-RCTActionSheet: 0e96e4560bd733c9b37efbf68f5b1a47615892fb
   React-RCTAnimation: fd138e26f120371c87e406745a27535e2c8a04ef
