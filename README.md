@@ -9,47 +9,66 @@
   <a href="https://docs.getstoryteller.com/documents/react-native-sdk" target="_blank"><img alt="Storyteller React Native Documentation" src="img/docs-btn.png" width="377" height="48"></a>
 </p>
 
-Use this repo as a reference for integrating Storyteller in your React Native App.
+## SDK Installation
 
-Storyteller is also available in native implementations for [iOS](https://github.com/getstoryteller/storyteller-sample-ios), [Android](https://github.com/getstoryteller/storyteller-sample-android) and [Web](https://github.com/getstoryteller/storyteller-sample-web).
+### Install with NPM
 
-For help with Storyteller, please check our [Documentation and User Guide](https://docs.getstoryteller.com/documents/) or contact [support@getstoryteller.com](mailto:support@getstoryteller.com?Subject=React%Native%20Sample%20App).
+`npm install @getstoryteller/react-native-storyteller-sdk`
 
+### Install with Yarn
 
-## Installing the SDK
+`yarn add @getstoryteller/react-native-storyteller-sdk`
 
-To install the package:
+## Documentation
 
+All of the documentation for our React Native SDK is [available on our website](https://www.getstoryteller.com/documentation/react-native/quickstart)
+
+## Sample App
+
+This project was bootstrapped with [the React Native CLI](https://reactnative.dev/docs/environment-setup?guide=native)
+
+### Prerequisites
+
+- A working React Native development environment
+
+Please see the guides on the [ReactNative website](https://reactnative.dev/docs/environment-setup) for instructions on how to configure your environment
+
+### Getting Started
+
+1. Update the `useStorytellerConfig.ts` file in this project with your Storyteller API key. For example:
+
+```typescript
+const useStorytellerConfig = () => ({
+  storytellerApiKey: '[API-KEY]',
+});
+
+export default useStorytellerConfig;
 ```
-    npm install @getstoryteller/react-native-storyteller-sdk
+
+> You should replace `[API-KEY]` with your Storyteller API key. [Get in touch](mailto:hello@getstoryteller.com) to request one.
+
+2. Run the following command in the project directory:
+
+```bash
+npm install
 ```
 
-## Building the Sample App
+1. To run on Android, run the following command:
 
-To run the sample app (Android):
-
-```
-    yarn android
+```bash
+npx react-native run-android
 ```
 
-or
+1. To run on iOS, run the following commands:
 
-```
-    npm install
-    npx react-native run-android
-```
+    1. `cd ios && pod repo update && pod install`
+    2. `cd ..`
+    3. `npx react-native run-ios`
 
-To run the sample app (iOS):
+## Other Platforms
 
-```
-    cd ios && pod install
-    yarn ios
-```
+Storyteller is also available for [iOS](https://github.com/getstoryteller/storyteller-sample-ios), [Android](https://github.com/getstoryteller/storyteller-sample-android) and [Web](https://github.com/getstoryteller/storyteller-sample-web).
 
-or
+## Need Help?
 
-```
-    npm install
-    cd ios && pod install
-    npx react-native run-ios
-```
+We're always available at [support@getstoryteller.com](mailto:support@getstoryteller.com?Subject=Web%20Sample%20App) to provide help and assistance with integrating the Storyteller SDK into your React Native application.
