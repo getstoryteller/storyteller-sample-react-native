@@ -1,6 +1,7 @@
 import {VerticalVideoList} from '../models/content';
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import StorytellerStoryUnit from './StorytellerStoryUnit';
+import {FlatList, RefreshControl} from 'react-native';
 
 interface VerticalVideoListRendererProps {
   verticalVideoLists: VerticalVideoList[];
@@ -9,13 +10,26 @@ interface VerticalVideoListRendererProps {
 const VerticalVideoListRenderer = ({
   verticalVideoLists,
 }: VerticalVideoListRendererProps) => {
-  console.log(verticalVideoLists);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onPullToRefresh = useCallback(() => {
+    setIsLoading(true);
+    // storytellerRefs.forEach(ref => {
+    //   ref.reloadData();
+    // });
+  }, [setIsLoading]);
+
   return (
-    <>
-      {verticalVideoLists.map((list: VerticalVideoList) => (
-        <StorytellerStoryUnit key={list.id} list={list} />
-      ))}
-    </>
+    <FlatList
+      refreshControl={
+        <RefreshControl refreshing={isLoading} onRefresh={onPullToRefresh} />
+      }
+      data={verticalVideoLists}
+      keyExtractor={item => item.id}
+      renderItem={({item}) => {
+        return <StorytellerStoryUnit list={item} />;
+      }}
+    />
   );
 };
 

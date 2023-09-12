@@ -1,7 +1,10 @@
 import {StorytellerStoriesRowView as StorytellerSDKRowView} from '@getstoryteller/react-native-storyteller-sdk';
-import React from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Size, TileType} from '../models/content';
+import TitleAndMoreButton from './TitleAndMoreButton';
+import useStoryteller from '../hooks/useStoryteller';
+import useRefCallback from '../hooks/useRefCallback';
 
 interface StorytellerStoriesRowViewProps {
   tileType: keyof typeof TileType;
@@ -20,6 +23,19 @@ const StorytellerStoriesRowView = ({
   displayLimit,
   moreButtonTitle,
 }: StorytellerStoriesRowViewProps) => {
+  const {isStorytellerInitialized} = useStoryteller();
+
+  let [storyRow] = useRefCallback<StorytellerSDKRowView>(
+    useCallback(
+      row => {
+        if (!isStorytellerInitialized) {
+          return;
+        }
+        row.reloadData();
+      },
+      [isStorytellerInitialized],
+    ),
+  );
 
   let height = 140;
   switch (size) {
@@ -40,20 +56,21 @@ const StorytellerStoriesRowView = ({
     },
   });
 
-  // TODO : Add TitleAndMoreButton component
+  // TODO : Proper PTR
 
   return (
-    <StorytellerSDKRowView
-      ref={(ref: any) => {
-        if (ref) {
-          ref.reloadData();
-        }
-      }}
-      cellType={cellType}
-      categories={categories}
-      displayLimit={displayLimit}
-      style={styles.storyContainer}
-    />
+    <View>
+      {title && (
+        <TitleAndMoreButton title={title} moreButtonTitle={moreButtonTitle} />
+      )}
+      <StorytellerSDKRowView
+        ref={storyRow}
+        cellType={cellType}
+        categories={categories}
+        displayLimit={displayLimit}
+        style={styles.storyContainer}
+      />
+    </View>
   );
 };
 

@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import useStorytellerConfig from '../hooks/useStorytellerConfig';
 import VerticalVideoListRenderer from './VerticalVideoListRenderer';
+import {View} from 'react-native';
+import { VerticalVideoList } from '../models/content';
 
 interface VerticalVideoListsProps {}
 
 const VerticalVideoLists = ({}: VerticalVideoListsProps) => {
   const {storytellerApiKey} = useStorytellerConfig();
 
-  let [lists, setLists] = useState([]);
+  let [lists, setLists] = useState<VerticalVideoList[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,14 +20,17 @@ const VerticalVideoLists = ({}: VerticalVideoListsProps) => {
         throw new Error('Failed to fetch data');
       }
       const {data: verticalVideoLists} = await entriesResponse.json();
-      console.log(verticalVideoLists);
 
       setLists(verticalVideoLists);
     }
     fetchData();
   }, [setLists, storytellerApiKey]);
 
-  return <VerticalVideoListRenderer verticalVideoLists={lists} />;
+  return (
+    <View className="container mx-auto">
+      <VerticalVideoListRenderer verticalVideoLists={lists} />
+    </View>
+  );
 };
 
 export default VerticalVideoLists;
