@@ -53,13 +53,13 @@ export default useStorytellerConfig;
 npm install
 ```
 
-1. To run on Android, run the following command:
+3. To run on Android, run the following command:
 
 ```bash
 npx react-native run-android
 ```
 
-1. To run on iOS, run the following commands:
+4. To run on iOS, run the following commands:
 
     1. `cd ios && pod repo update && pod install`
     2. `cd ..`
