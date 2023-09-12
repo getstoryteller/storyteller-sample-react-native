@@ -8,13 +8,11 @@ import React from 'react';
 interface StorytellerStoryUnitProps {
   list: VerticalVideoList;
   onReloadComplete: (listId: string) => void;
-  onError: (listId: string) => void;
 }
 
 const StorytellerStoryUnit = ({
   list,
   onReloadComplete,
-  onError,
 }: StorytellerStoryUnitProps) => {
   const categories = list.categories?.map(category => category) || [];
 
@@ -37,7 +35,6 @@ const StorytellerStoryUnit = ({
         categories={categories}
         title={list.title}
         onReloadComplete={onReloadComplete}
-        onError={onError}
       />
     );
   } else if (isGridOfStories) {
@@ -48,7 +45,6 @@ const StorytellerStoryUnit = ({
         categories={categories}
         title={list.title}
         onReloadComplete={onReloadComplete}
-        onError={onError}
       />
     );
   } else if (isRowOfClips && list.collection) {
@@ -60,7 +56,6 @@ const StorytellerStoryUnit = ({
         displayLimit={list.count}
         title={list.title}
         onReloadComplete={onReloadComplete}
-        onError={onError}
       />
     );
   } else if (isGridOfClips && list.collection) {
@@ -71,7 +66,6 @@ const StorytellerStoryUnit = ({
         displayLimit={list.count}
         title={list.title}
         onReloadComplete={onReloadComplete}
-        onError={onError}
       />
     );
   } else {

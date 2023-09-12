@@ -1,6 +1,6 @@
 const buildBasicTheme = () => ({
   colors: {
-    primary: '#F75258',
+    primary: '#06AE72',
   },
   font: 'Questrial, sans-serif',
   lists: {

@@ -15,7 +15,6 @@ interface StorytellerStoriesRowViewProps {
   title?: string | undefined;
   displayLimit?: number | undefined;
   onReloadComplete: (listId: string) => void;
-  onError: (listId: string) => void;
 }
 
 const StorytellerStoriesRowView = ({
@@ -26,7 +25,6 @@ const StorytellerStoriesRowView = ({
   title,
   displayLimit,
   onReloadComplete,
-  onError,
 }: StorytellerStoriesRowViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
 
@@ -72,13 +70,10 @@ const StorytellerStoriesRowView = ({
         style={styles.storyContainer}
         theme={basicTheme}
         onDataLoadCompleted={(
-          success: boolean,
+          _success: boolean,
           _error: Error,
-          dataCount: number,
+          _dataCount: number,
         ) => {
-          if (!success || dataCount === 0) {
-            onError(id);
-          }
           onReloadComplete(id);
         }}
       />

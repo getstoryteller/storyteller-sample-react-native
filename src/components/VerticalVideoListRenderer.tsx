@@ -43,21 +43,6 @@ const VerticalVideoListRenderer = ({
     [setIsLoading, storytellerLists],
   );
 
-  const onError = useCallback(
-    (listId: string) => {
-      if (
-        storytellerLists &&
-        storytellerLists.filter(list => list.id === listId).length > 0
-      ) {
-        const indexToRemove = storytellerLists.indexOf(
-          storytellerLists.filter(list => list.id === listId)[0],
-        );
-        storytellerLists.splice(indexToRemove, 1);
-      }
-    },
-    [storytellerLists],
-  );
-
   return (
     <FlatList
       refreshControl={
@@ -70,7 +55,6 @@ const VerticalVideoListRenderer = ({
           <StorytellerStoryUnit
             list={item}
             onReloadComplete={onReloadComplete}
-            onError={onError}
           />
         );
       }}

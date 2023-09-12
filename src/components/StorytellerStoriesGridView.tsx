@@ -12,7 +12,6 @@ interface StorytellerStoriesGridViewProps {
   title?: string | undefined;
   displayLimit?: number | undefined;
   onReloadComplete: (listId: string) => void;
-  onError: (listId: string) => void;
 }
 
 const StorytellerStoriesGridView = ({
@@ -21,7 +20,6 @@ const StorytellerStoriesGridView = ({
   title,
   displayLimit,
   onReloadComplete,
-  onError,
 }: StorytellerStoriesGridViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
   let [storyGrid] = useRefCallback<StorytellerSDKGridView>(
@@ -55,13 +53,10 @@ const StorytellerStoriesGridView = ({
         style={styles.storyContainer}
         theme={basicTheme}
         onDataLoadCompleted={(
-          success: boolean,
+          _success: boolean,
           _error: Error,
-          dataCount: number,
+          _dataCount: number,
         ) => {
-          if (!success || dataCount === 0) {
-            onError(id);
-          }
           onReloadComplete(id);
         }}
       />
