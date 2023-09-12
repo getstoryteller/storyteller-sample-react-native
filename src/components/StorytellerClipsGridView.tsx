@@ -38,16 +38,15 @@ const StorytellerClipsGridView = ({
 
   const styles = StyleSheet.create({
     storyContainer: {
-      width: 'auto',
+      width: '100%',
       marginLeft: 12,
       marginRight: 12,
+      minHeight: 168,
     },
   });
 
-  // TODO : Proper PTR
-
   return (
-    <View>
+    <View style={{overflow: 'hidden'}}>
       {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKGridView
         ref={storyGrid}

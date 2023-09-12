@@ -41,11 +41,12 @@ const StorytellerStoriesGridView = ({
       width: 'auto',
       marginLeft: 12,
       marginRight: 12,
+      minHeight: 168,
     },
   });
 
   return (
-    <View>
+    <View style={{overflow: 'hidden'}}>
       {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKGridView
         ref={storyGrid}
