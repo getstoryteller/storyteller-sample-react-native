@@ -10,15 +10,14 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import Storyteller from '@getstoryteller/react-native-storyteller-sdk';
-Storyteller.getConstants();
-
 import StorytellerContext from './context/StorytellerContext';
 import VerticalVideoLists from './components/VerticalVideoLists';
+import AmplitudeContext from './context/AmplitudeContext';
 
-class App extends React.Component<any, any> {
-  render() {
-    return (
+function App() {
+
+  return (
+    <AmplitudeContext>
       <StorytellerContext>
         <SafeAreaView style={getContainerStyle(isDarkMode)}>
           <View>
@@ -31,8 +30,8 @@ class App extends React.Component<any, any> {
           <VerticalVideoLists />
         </SafeAreaView>
       </StorytellerContext>
-    );
-  }
+    </AmplitudeContext>
+  );
 }
 
 function getAppTitleStyle(isDark: Boolean): StyleProp<TextStyle> {

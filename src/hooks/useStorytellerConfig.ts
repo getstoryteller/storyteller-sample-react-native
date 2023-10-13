@@ -1,5 +1,5 @@
 const useStorytellerConfig = () => ({
-  storytellerApiKey: '',
+  storytellerApiKey: '[API-KEY]',
 });
 
 export default useStorytellerConfig;

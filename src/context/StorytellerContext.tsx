@@ -7,6 +7,10 @@ import React, {
 
 import Storyteller from '@getstoryteller/react-native-storyteller-sdk';
 import useStorytellerConfig from '../hooks/useStorytellerConfig';
+import {NativeEventEmitter} from 'react-native';
+import {useAmplitudeTracker} from '../hooks/useAmplitudeTracker';
+
+const {ON_USER_ACTIVITY_OCCURRED} = Storyteller.getConstants();
 
 export const StorytellerContext = React.createContext({
   isStorytellerInitialized: false,
@@ -17,6 +21,7 @@ const StorytellerContextProvider: React.FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
   const {storytellerApiKey} = useStorytellerConfig();
+  const {logUserActivityToAmplitude} = useAmplitudeTracker();
 
   const [isStorytellerInitialized, setIsStorytellerInitialized] =
     useState(false);
@@ -24,7 +29,7 @@ const StorytellerContextProvider: React.FC<PropsWithChildren<{}>> = ({
   const initializeStoryteller = useCallback(
     (userId: string | undefined = undefined) => {
       if (!storytellerApiKey) {
-        throw new Error('Web SDK API key is not defined');
+        throw new Error('Storyteller SDK API key is not defined');
       } else if (!isStorytellerInitialized) {
         Storyteller.initialize(
           {
@@ -46,6 +51,20 @@ const StorytellerContextProvider: React.FC<PropsWithChildren<{}>> = ({
       initializeStoryteller();
     }
   }, [initializeStoryteller, isStorytellerInitialized]);
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(Storyteller);
+    let eventListener = eventEmitter.addListener(
+      ON_USER_ACTIVITY_OCCURRED,
+      event => {
+        logUserActivityToAmplitude(event.type, event.data);
+      },
+    );
+
+    return () => {
+      eventListener.remove();
+    };
+  }, [logUserActivityToAmplitude]);
 
   return (
     <StorytellerContext.Provider
