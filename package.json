@@ -4,17 +4,18 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator=\"iPhone 14 Pro\"",
+    "ios": "react-native run-ios --simulator=\"iPhone 15 Pro\"",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
     "@amplitude/analytics-react-native": "^1.4.4",
-    "@getstoryteller/react-native-storyteller-sdk": "^9.7.2",
+    "@getstoryteller/react-native-storyteller-sdk": "^9.7.3",
+    "@react-native-community/cli-platform-ios": "^11.3.9",
     "@react-native-async-storage/async-storage": "^1.19.3",
     "react": "18.2.0",
-    "react-native": "0.72.5"
+    "react-native": "0.72.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
