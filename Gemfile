@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
-
 # You may use http://rbenv.org/ or https://rvm.io/ to install and use this version
-ruby ">= 2.6.10"
-
-gem 'cocoapods', '>= 1.13.0'	gem 'cocoapods', '~> 1.13'
+ruby '2.7.4'
+gem 'cocoapods', '~> 1.11', '>= 1.11.2'
