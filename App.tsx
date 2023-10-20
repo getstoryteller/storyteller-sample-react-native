@@ -11,39 +11,38 @@
 import React from 'react';
 import {
   Appearance,
+  Image,
+  NativeEventEmitter,
+  NativeModules,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   View,
-  NativeEventEmitter,
-  NativeModules,
-  Platform,
-  Image,
 } from 'react-native';
-
-const {StorytellerSdk} = NativeModules;
-
-import Storyteller, {
-  StorytellerRowView,
-  StorytellerGridView,
-  StorytellerClipsRowView,
-  StorytellerClipsGridView,
-} from '@getstoryteller/react-native-storyteller-sdk';
-const {USER_NAVIGATED_TO_APP, GET_ADS_FOR_LIST, ON_USER_ACTIVITY_OCCURRED} =
-  Storyteller.getConstants();
 import type {
+  ClientStory,
   EventType,
   UserActivityData,
-  ClientStory,
+} from '@getstoryteller/react-native-storyteller-sdk';
+import Storyteller, {
+  StorytellerClipsRowView,
+  StorytellerStoriesGridView,
+  StorytellerStoriesRowView,
 } from '@getstoryteller/react-native-storyteller-sdk';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
+const {StorytellerSdk} = NativeModules;
+
+const {USER_NAVIGATED_TO_APP, GET_ADS_FOR_LIST, ON_USER_ACTIVITY_OCCURRED} =
+  Storyteller.getConstants();
+
 class App extends React.Component<any, any> {
-  private rowRef?: StorytellerRowView;
-  private gridRef?: StorytellerGridView;
-  private rowClipsRef?: StorytellerClipsRowView
+  private rowRef?: StorytellerStoriesRowView;
+  private gridRef?: StorytellerStoriesGridView;
+  private rowClipsRef?: StorytellerClipsRowView;
 
   private actionListener: any;
   private adsListener: any;
@@ -86,25 +85,26 @@ class App extends React.Component<any, any> {
     data: UserActivityData;
   }) => {
     console.log(
-      `ActivityOccurred\n` +
+      'ActivityOccurred\n' +
         `type: ${body.type}, data: ${JSON.stringify(body.data)}`,
     );
   };
 
   _onUserNavigatedToApp = (body: {url: string}) => {
-    console.log(`UserNavigatedToApp\n` + `url: ${body.url}`);
+    console.log('UserNavigatedToApp\n' + `url: ${body.url}`);
   };
 
   _onGetAdsForList = (body: {stories: [ClientStory]}) => {
-    console.log(`GetAdsForList\n` + `stories: ${JSON.stringify(body.stories)}`);
+    console.log('GetAdsForList\n' + `stories: ${JSON.stringify(body.stories)}`);
   };
 
   _initializeStoryteller = () => {
-    Storyteller.initialize({
-      apiKey: 'test-key',
-      externalId: 'test-user',
-      customInstanceHost: '', // URL of custom instance to run API
-    },
+    Storyteller.initialize(
+      {
+        apiKey: 'test-key',
+        externalId: 'test-user',
+        customInstanceHost: '', // URL of custom instance to run API
+      },
       (callback: {result: Boolean; message: string}) => {
         console.log(`result: ${callback.result} message: ${callback.message}`);
         this._reloadDataIfNeeded();
@@ -113,9 +113,15 @@ class App extends React.Component<any, any> {
   };
 
   _reloadDataIfNeeded = () => {
-    if (this.rowRef) this.rowRef.reloadData();
-    if (this.gridRef) this.gridRef.reloadData();
-    if (this.rowClipsRef) this.rowClipsRef.reloadData();
+    if (this.rowRef) {
+      this.rowRef.reloadData();
+    }
+    if (this.gridRef) {
+      this.gridRef.reloadData();
+    }
+    if (this.rowClipsRef) {
+      this.rowClipsRef.reloadData();
+    }
   };
 
   render() {
@@ -130,12 +136,13 @@ class App extends React.Component<any, any> {
               flex: 1,
               backgroundColor: isDarkMode ? Colors.black : Colors.white,
             }}>
-            <StorytellerRowView
+            <StorytellerStoriesRowView
               ref={(ref: any) => {
-                if (ref) this.rowRef = ref;
+                if (ref) {
+                  this.rowRef = ref;
+                }
               }}
               style={styles.storyContainer}
-
               // learn more - https://docs.getstoryteller.com/documents/react-native-sdk/StorytellerComponent
 
               // Categories for which row will display stories
@@ -156,20 +163,20 @@ class App extends React.Component<any, any> {
                   instructions: {
                     icons: {
                       forward: Image.resolveAssetSource(
-                        require(`./assets/ic_forward_black.png`)
+                        require('./assets/ic_forward_black.png'),
                       ),
                       pause: Image.resolveAssetSource(
-                        require(`./assets/ic_pause_black.png`)
+                        require('./assets/ic_pause_black.png'),
                       ),
                       back: Image.resolveAssetSource(
-                        require(`./assets/ic_back_black.png`)
+                        require('./assets/ic_back_black.png'),
                       ),
                       move: Image.resolveAssetSource(
-                        require(`./assets/ic_swipe_black.png`)
+                        require('./assets/ic_swipe_black.png'),
                       ),
                     },
                   },
-                }
+                },
               }}
 
               // Callback for when the SDK starts loading story data
@@ -184,16 +191,18 @@ class App extends React.Component<any, any> {
               // Callback for when a tile in the row becomes visible
               // onTileBecameVisible={}
             />
-            <StorytellerClipsRowView 
-            ref={(ref: any) => {
-              if (ref) this.rowClipsRef = ref;
-            }}
-            style={styles.clipsContainer}
+            <StorytellerClipsRowView
+              ref={(ref: any) => {
+                if (ref) {
+                  this.rowClipsRef = ref;
+                }
+              }}
+              style={styles.clipsContainer}
 
               // Collection for which row will display clips
               // collection={}
 
-               // Number of stories displayed in component
+              // Number of stories displayed in component
               // displayLimit={}
 
               // Style of the cell in the row - can be 'round' or 'square'
@@ -217,7 +226,6 @@ class App extends React.Component<any, any> {
               // Callback for when a tile in the row becomes visible
               // onTileBecameVisible={}
             />
-          
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -243,6 +251,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-
 
 export default App;
