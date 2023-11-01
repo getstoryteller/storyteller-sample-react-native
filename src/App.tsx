@@ -15,7 +15,6 @@ import VerticalVideoLists from './components/VerticalVideoLists';
 import AmplitudeContext from './context/AmplitudeContext';
 
 function App() {
-
   return (
     <AmplitudeContext>
       <StorytellerContext>

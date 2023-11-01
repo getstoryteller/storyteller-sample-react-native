@@ -7,11 +7,18 @@ import React from 'react';
 
 interface StorytellerStoryUnitProps {
   list: VerticalVideoList;
-  onReloadComplete: (listId: string) => void;
+  shouldReload: boolean;
+  onReloadComplete: (
+    listId: string,
+    success: boolean,
+    error: Error,
+    dataCount: number,
+  ) => void;
 }
 
 const StorytellerStoryUnit = ({
   list,
+  shouldReload,
   onReloadComplete,
 }: StorytellerStoryUnitProps) => {
   const categories = list.categories?.map(category => category) || [];
@@ -34,6 +41,7 @@ const StorytellerStoryUnit = ({
         displayLimit={list.count}
         categories={categories}
         title={list.title}
+        shouldReload={shouldReload}
         onReloadComplete={onReloadComplete}
       />
     );
@@ -44,6 +52,7 @@ const StorytellerStoryUnit = ({
         displayLimit={list.count}
         categories={categories}
         title={list.title}
+        shouldReload={shouldReload}
         onReloadComplete={onReloadComplete}
       />
     );
@@ -55,6 +64,7 @@ const StorytellerStoryUnit = ({
         collection={list.collection}
         displayLimit={list.count}
         title={list.title}
+        shouldReload={shouldReload}
         onReloadComplete={onReloadComplete}
       />
     );
@@ -65,6 +75,7 @@ const StorytellerStoryUnit = ({
         collection={list.collection}
         displayLimit={list.count}
         title={list.title}
+        shouldReload={shouldReload}
         onReloadComplete={onReloadComplete}
       />
     );

@@ -30,7 +30,7 @@ const VerticalVideoListRenderer = ({
   }, [setIsLoading, storytellerLists]);
 
   const onReloadComplete = useCallback(
-    (listId: string) => {
+    (listId: string, success: boolean, error: Error, dataCount: number) => {
       setIsLoading(false);
       if (
         storytellerLists &&
@@ -39,6 +39,9 @@ const VerticalVideoListRenderer = ({
         storytellerLists.filter(list => list.id === listId)[0].shouldReload =
           false;
       }
+      console.log(
+        `onReloadComplete: [listId = ${listId}, success = ${success}, error = ${error}, dataCount = ${dataCount}]`,
+      );
     },
     [setIsLoading, storytellerLists],
   );
@@ -54,6 +57,7 @@ const VerticalVideoListRenderer = ({
         return (
           <StorytellerStoryUnit
             list={item}
+            shouldReload={item.shouldReload}
             onReloadComplete={onReloadComplete}
           />
         );
