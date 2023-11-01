@@ -1,5 +1,5 @@
 import {StorytellerClipsRowView as StorytellerSDKRowView} from '@getstoryteller/react-native-storyteller-sdk';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Size} from '../models/content';
 import TitleAndMoreButton from './TitleAndMoreButton';
@@ -13,7 +13,13 @@ interface StorytellerStoriesRowViewProps {
   collection: string;
   title?: string | undefined;
   displayLimit?: number | undefined;
-  onReloadComplete: (listId: string) => void;
+  shouldReload: boolean;
+  onReloadComplete: (
+    listId: string,
+    success: boolean,
+    error: Error,
+    dataCount: number,
+  ) => void;
 }
 
 const StorytellerClipsRowView = ({
@@ -22,21 +28,29 @@ const StorytellerClipsRowView = ({
   collection,
   title,
   displayLimit,
+  shouldReload,
   onReloadComplete,
 }: StorytellerStoriesRowViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
 
-  let [storyRow] = useRefCallback<StorytellerSDKRowView>(
-    useCallback(
-      row => {
-        if (!isStorytellerInitialized) {
-          return;
-        }
-        row.reloadData();
-      },
-      [isStorytellerInitialized],
-    ),
-  );
+  let {ref: clipsRow, setRef: setClipsRow} =
+    useRefCallback<StorytellerSDKRowView>(
+      useCallback(
+        row => {
+          if (!isStorytellerInitialized) {
+            return;
+          }
+          row.reloadData();
+        },
+        [isStorytellerInitialized],
+      ),
+    );
+
+  useEffect(() => {
+    if (shouldReload && clipsRow.current && isStorytellerInitialized) {
+      clipsRow.current?.reloadData();
+    }
+  }, [shouldReload, clipsRow, isStorytellerInitialized]);
 
   let height = 100;
   switch (size) {
@@ -59,7 +73,7 @@ const StorytellerClipsRowView = ({
     <View>
       {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKRowView
-        ref={storyRow}
+        ref={setClipsRow}
         collection={collection}
         displayLimit={displayLimit}
         style={styles.storyContainer}
@@ -69,7 +83,7 @@ const StorytellerClipsRowView = ({
           _error: Error,
           _dataCount: number,
         ) => {
-          onReloadComplete(id);
+          onReloadComplete(id, _success, _error, _dataCount);
         }}
       />
     </View>

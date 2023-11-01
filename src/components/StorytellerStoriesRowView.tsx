@@ -1,5 +1,5 @@
 import {StorytellerStoriesRowView as StorytellerSDKRowView} from '@getstoryteller/react-native-storyteller-sdk';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Size, TileType} from '../models/content';
 import TitleAndMoreButton from './TitleAndMoreButton';
@@ -14,7 +14,13 @@ interface StorytellerStoriesRowViewProps {
   categories: string[];
   title?: string | undefined;
   displayLimit?: number | undefined;
-  onReloadComplete: (listId: string) => void;
+  shouldReload: boolean;
+  onReloadComplete: (
+    listId: string,
+    success: boolean,
+    error: Error,
+    dataCount: number,
+  ) => void;
 }
 
 const StorytellerStoriesRowView = ({
@@ -24,21 +30,29 @@ const StorytellerStoriesRowView = ({
   categories,
   title,
   displayLimit,
+  shouldReload,
   onReloadComplete,
 }: StorytellerStoriesRowViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
 
-  let [storyRow] = useRefCallback<StorytellerSDKRowView>(
-    useCallback(
-      row => {
-        if (!isStorytellerInitialized) {
-          return;
-        }
-        row.reloadData();
-      },
-      [isStorytellerInitialized],
-    ),
-  );
+  let {ref: storyRow, setRef: setStoryRow} =
+    useRefCallback<StorytellerSDKRowView>(
+      useCallback(
+        row => {
+          if (!isStorytellerInitialized) {
+            return;
+          }
+          row.reloadData();
+        },
+        [isStorytellerInitialized],
+      ),
+    );
+
+  useEffect(() => {
+    if (shouldReload && storyRow.current && isStorytellerInitialized) {
+      storyRow.current?.reloadData();
+    }
+  }, [shouldReload, storyRow, isStorytellerInitialized]);
 
   let height = 100;
   switch (size) {
@@ -63,7 +77,7 @@ const StorytellerStoriesRowView = ({
     <View>
       {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKRowView
-        ref={storyRow}
+        ref={setStoryRow}
         cellType={cellType}
         categories={categories}
         displayLimit={displayLimit}
@@ -74,7 +88,7 @@ const StorytellerStoriesRowView = ({
           _error: Error,
           _dataCount: number,
         ) => {
-          onReloadComplete(id);
+          onReloadComplete(id, _success, _error, _dataCount);
         }}
       />
     </View>

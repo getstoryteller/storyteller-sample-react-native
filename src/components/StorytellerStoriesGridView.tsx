@@ -1,5 +1,5 @@
 import {StorytellerStoriesGridView as StorytellerSDKGridView} from '@getstoryteller/react-native-storyteller-sdk';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import TitleAndMoreButton from './TitleAndMoreButton';
 import useRefCallback from '../hooks/useRefCallback';
@@ -11,7 +11,13 @@ interface StorytellerStoriesGridViewProps {
   categories: string[];
   title?: string | undefined;
   displayLimit?: number | undefined;
-  onReloadComplete: (listId: string) => void;
+  shouldReload: boolean;
+  onReloadComplete: (
+    listId: string,
+    success: boolean,
+    error: Error,
+    dataCount: number,
+  ) => void;
 }
 
 const StorytellerStoriesGridView = ({
@@ -19,20 +25,28 @@ const StorytellerStoriesGridView = ({
   categories,
   title,
   displayLimit,
+  shouldReload,
   onReloadComplete,
 }: StorytellerStoriesGridViewProps) => {
   const {isStorytellerInitialized} = useStoryteller();
-  let [storyGrid] = useRefCallback<StorytellerSDKGridView>(
-    useCallback(
-      grid => {
-        if (!isStorytellerInitialized) {
-          return;
-        }
-        grid.reloadData();
-      },
-      [isStorytellerInitialized],
-    ),
-  );
+  let {ref: storyGrid, setRef: setStoryGrid} =
+    useRefCallback<StorytellerSDKGridView>(
+      useCallback(
+        grid => {
+          if (!isStorytellerInitialized) {
+            return;
+          }
+          grid.reloadData();
+        },
+        [isStorytellerInitialized],
+      ),
+    );
+
+  useEffect(() => {
+    if (shouldReload && storyGrid.current && isStorytellerInitialized) {
+      storyGrid.current?.reloadData();
+    }
+  }, [shouldReload, storyGrid, isStorytellerInitialized]);
 
   const styles = StyleSheet.create({
     storyContainer: {
@@ -47,7 +61,7 @@ const StorytellerStoriesGridView = ({
     <View style={{overflow: 'hidden'}}>
       {title && <TitleAndMoreButton title={title} />}
       <StorytellerSDKGridView
-        ref={storyGrid}
+        ref={setStoryGrid}
         categories={categories}
         displayLimit={displayLimit}
         style={styles.storyContainer}
@@ -57,7 +71,7 @@ const StorytellerStoriesGridView = ({
           _error: Error,
           _dataCount: number,
         ) => {
-          onReloadComplete(id);
+          onReloadComplete(id, _success, _error, _dataCount);
         }}
       />
     </View>

@@ -21,7 +21,7 @@ function useRefCallback<T>(
     [onMount, onUnmount],
   );
 
-  return [setRef];
+  return {ref, setRef};
 }
 
 export default useRefCallback;
