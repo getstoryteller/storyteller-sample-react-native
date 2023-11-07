@@ -10,10 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@getstoryteller/react-native-storyteller-sdk": "^9.7.3",
     "@amplitude/analytics-react-native": "^1.4.4",
-    "@react-native-community/cli-platform-ios": "^11.3.9",
+    "@getstoryteller/react-native-storyteller-sdk": "^9.7.3-0.67.5",
     "@react-native-async-storage/async-storage": "^1.19.3",
+    "@react-native-community/cli-platform-ios": "^11.3.9",
     "react": "17.0.2",
     "react-native": "0.67.5"
   },
