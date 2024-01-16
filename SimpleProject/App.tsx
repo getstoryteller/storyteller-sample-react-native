@@ -24,7 +24,7 @@ import {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const storytellerApiKey = "[API-KEY]"
+  const storytellerApiKey = "[API-KEY]";
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };

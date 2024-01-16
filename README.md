@@ -23,47 +23,12 @@
 
 All of the documentation for our React Native SDK is [available on our website](https://www.getstoryteller.com/documentation/react-native/quickstart)
 
-## Sample App
+## Sample Apps
 
-This project was bootstrapped with [the React Native CLI](https://reactnative.dev/docs/environment-setup?guide=native)
+This repo contains the following sample applications:
 
-### Prerequisites
-
-- A working React Native development environment
-
-Please see the guides on the [ReactNative website](https://reactnative.dev/docs/environment-setup) for instructions on how to configure your environment
-
-### Getting Started
-
-1. Update the `useStorytellerConfig.ts` file in this project with your Storyteller API key. For example:
-
-```typescript
-const useStorytellerConfig = () => ({
-  storytellerApiKey: '[API-KEY]',
-});
-
-export default useStorytellerConfig;
-```
-
-> You should replace `[API-KEY]` with your Storyteller API key. [Get in touch](mailto:hello@getstoryteller.com) to request one.
-
-2. Run the following command in the project directory:
-
-```bash
-npm install
-```
-
-3. To run on Android, run the following command:
-
-```bash
-npx react-native run-android
-```
-
-4. To run on iOS, run the following commands:
-
-    1. `cd ios && pod repo update && pod install`
-    2. `cd ..`
-    3. `npx react-native run-ios`
+- [Simple Project](https://github.com/getstoryteller/storyteller-sample-react-native/tree/main/SimpleProject)
+- [Advanced Project](https://github.com/getstoryteller/storyteller-sample-react-native/tree/main/AdvancedProject)
 
 ## Other Platforms
 
