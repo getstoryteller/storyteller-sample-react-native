@@ -424,10 +424,10 @@ PODS:
   - React-jsinspector (0.72.6)
   - React-logger (0.72.6):
     - glog
-  - react-native-storyteller-sdk (9.8.0):
+  - react-native-storyteller-sdk (9.8.4):
     - React-Core
-    - StorytellerSDK (~> 9.8.0)
-  - react-native-storyteller-sdk-gam (3.0.2):
+    - StorytellerSDK (~> 9.8.1)
+  - react-native-storyteller-sdk-gam (3.0.3):
     - Google-Mobile-Ads-SDK
     - React-Core
   - React-NativeModulesApple (0.72.6):
@@ -772,8 +772,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 3bf18ff7cb03cd8dfdce08fbbc0d15058c1d71ae
   React-jsinspector: 194e32c6aab382d88713ad3dd0025c5f5c4ee072
   React-logger: cebf22b6cf43434e471dc561e5911b40ac01d289
-  react-native-storyteller-sdk: 6cf6a922dad00bff2825e099e60f0d9ab532e6cc
-  react-native-storyteller-sdk-gam: 225f8777416434149e35f938bb04e24d8f5f1c5f
+  react-native-storyteller-sdk: 551bbb7c947a7dccebded47d8c76352037fb7fd5
+  react-native-storyteller-sdk-gam: fd281d040cda3eb2d31b184ed20f32f476174816
   React-NativeModulesApple: 02e35e9a51e10c6422f04f5e4076a7c02243fff2
   React-perflogger: e3596db7e753f51766bceadc061936ef1472edc3
   React-RCTActionSheet: 17ab132c748b4471012abbcdcf5befe860660485
